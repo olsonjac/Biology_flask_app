@@ -15,6 +15,13 @@ def my_form_post():
     DnaSeq = request.form['DnaSeq']
     DnaSeq = DnaSeq.upper()
     
+    #checks that the user input was one of the 4 accepted DNA bases, ATCG
+    for x in DnaSeq:
+      if x != "A" and x != "T" and x != "C" and x != "G":
+        error = "enter only A,T,C or G"
+        return render_template("error.html",
+                               error=error)
+
     #Checks user input to see if multiples of 3 DNA bases were added(its required to be in groups of 3)
     if len(DnaSeq) % 3 != 0:
       error = " invalid input: please enter DNA bases in groups of 3 and make sure you only use the bases (A,T,C,G)"
