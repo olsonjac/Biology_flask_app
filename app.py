@@ -1,27 +1,33 @@
 from flask import Flask, request, render_template
 app = Flask(__name__)
+
 if __name__== '__main__':
   app.run(debug=False, host="0.0.0.0")
 
+#This sends the user to the main index.html, "home page". 
 @app.route('/')
 def my_form():
     return render_template('index.html')
 
+#This routes the user input from the index.html page into the DnaSeq variable.
 @app.route('/', methods=['POST','GET'])
 def my_form_post():
     DnaSeq = request.form['DnaSeq']
     DnaSeq = DnaSeq.upper()
+    
+    #Checks user input to see if multiples of 3 DNA bases were added(its required to be in groups of 3)
     if len(DnaSeq) % 3 != 0:
       error = " invalid input: please enter DNA bases in groups of 3 and make sure you only use the bases (A,T,C,G)"
       return render_template("error.html",
                              error=error)
+    #checks for numerical data in the submission and redirects to the error page if found
     if DnaSeq.isdigit():
       error =" no numbers allowed"
       return render_template("error.html",
                              error=error)
 
 
-   #print("DNA: "+ DnaSeq)
+   #initializes the empty string for the rna sequence.
     rna = ""
 
 # Generate the RNA string
@@ -38,7 +44,7 @@ def my_form_post():
 
     #makes a list of rna then prints rna and codon list
     rna_seq = [(rna[i:i+3]) for i in range(0,len(rna), 3)]
-    #return "RNA Sequence: " + ",".join(rna_seq) 
+    
 
     # mRNA Codon dictionary that will be used to translate the RNA sequence into the amino acid sequence. 
     rna_codon_dict = {"UUU" : "Phe", "CUU" : "Leu", "AUU" : "Ile", "GUU" : "Val",
@@ -64,7 +70,8 @@ def my_form_post():
     amino_acid=[]
     for x in range(len(rna_seq)):
       amino_acid.append(rna_codon_dict[rna_seq[x]])
-    #amino_acid = ",".join(amino_acid)
+    
+    #this routes all the variables gathered from the script into the results.html page so that they can be displayed
     return render_template("results.html",
                            amino_acid=amino_acid,
                            rna_seq=rna_seq,
