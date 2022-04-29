@@ -10,7 +10,7 @@ def my_form():
     return render_template('index.html')
 
 #This routes the user input from the index.html page into the DnaSeq variable.
-@app.route('/', methods=['POST','GET'])
+@app.route('/', methods=['POST'])
 def my_form_post():
     DnaSeq = request.form['DnaSeq']
     DnaSeq = DnaSeq.upper()
