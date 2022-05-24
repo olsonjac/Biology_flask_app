@@ -5,3 +5,7 @@ The files included create a simple website using the lightweight flask framework
 
 
 Gunicorn was used for the wsgi and Nginx was used for the general hosting of the site.
+
+--------------------------------------------------------------------------------------
+UPDATE:
+A Dockerfile has been included that can be used to create an image of this flask application that can be ran as a container.
