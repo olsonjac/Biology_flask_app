@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: docker login
       env:
-        DOCKER_USER: ${{secrets.DOCKERHUBUSER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKERHUBPASSWORD}}
+        DOCKERHUBUSER: ${{secrets.DOCKERHUBUSER}}
+        DOCKERHUBPASSWORD: ${{secrets.DOCKERHUBPASSWORD}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        docker login -u $DOCKERHUBUSER -p $DOCKERHUBPASSWORD 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag olsonjac/bio_web_app:$(date +%s)
       
