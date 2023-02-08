@@ -18,10 +18,9 @@ jobs:
       env:
         DOCKERHUBUSER: ${{secrets.DOCKERHUBUSER}}
         DOCKERHUBPASSWORD: ${{secrets.DOCKERHUBPASSWORD}}
-      run: |
-        docker login -u $DOCKERHUBUSER -p $DOCKERHUBPASSWORD 
+      run: | 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag olsonjac/bio_web_app:$(date +%s)
-      
+        docker login -u $DOCKERHUBUSER -p $DOCKERHUBPASSWORD
     - name: Docker Push
       run: docker push olsonjac/bio_web_app
