@@ -10,3 +10,8 @@
 --------------------------------------------------------------------------------------
 <h2>UPDATE:</h2>
 A Dockerfile has been included that can be used to create an image of this flask application that can be ran as a container.
+
+
+---------------------------------------------------------------------------------------
+<h2>Github Actions Workflow</h2> 
+Github Actions Workflow yaml was added to build the image natively in Github. DockerHub Registry Push to come next
